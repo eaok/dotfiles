@@ -1,0 +1,6 @@
+[user]
+	name = miwsl
+	email = miwsl@gmail.com
+[core]
+	editor = vim
+	filemode = false
