@@ -37,6 +37,12 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 
+" 简要帮助文档
+" :PluginList       - 列出所有已配置的插件
+" :PluginInstall    - 安装插件,追加 `!` 用以更新或使用 :PluginUpdate
+" :PluginSearch foo - 搜索 foo ; 追加 `!` 清除本地缓存
+" :PluginClean      - 清除未使用插件,需要确认; 追加 `!` 自动批准移除未使用插件
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "                Plugins Setting                 "
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,9 +177,6 @@ let mapleader=';'
 " 使用 jj/kk 替代 esc
 inoremap jj <Esc>`^
 inoremap kk <Esc>`^
-
-" 跳到新的一行
-inoremap a/ <Esc>o
 
 " 使用 leader + w(我的leader改成了逗号)，快速保存。无论是在 insert 还是 normal 模式
 inoremap <leader>w <Esc>:w<cr>
