@@ -59,8 +59,7 @@ fi
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -117,18 +116,21 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \[\033[01;31m\]$(git_branch)\[\033[00m\]\$ '
+
 # Set colors for man pages
-#man() {
-#  env \
-#  LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-#  LESS_TERMCAP_md=$(printf "\e[1;31m") \
-#  LESS_TERMCAP_me=$(printf "\e[0m") \
-#  LESS_TERMCAP_se=$(printf "\e[0m") \
-#  LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-#  LESS_TERMCAP_ue=$(printf "\e[0m") \
-#  LESS_TERMCAP_us=$(printf "\e[1;32m") \
-#  man "$@"
-#}
+man() {
+  env \
+  LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+  LESS_TERMCAP_md=$(printf "\e[1;31m") \
+  LESS_TERMCAP_me=$(printf "\e[0m") \
+  LESS_TERMCAP_se=$(printf "\e[0m") \
+  LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+  LESS_TERMCAP_ue=$(printf "\e[0m") \
+  LESS_TERMCAP_us=$(printf "\e[1;32m") \
+  man "$@"
+}
 
 # Set show git branch with color
 function git_branch {
@@ -141,24 +143,25 @@ function git_branch {
     fi
 }
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \[\033[01;31m\]$(git_branch)\[\033[00m\]\$ '
 
 # Set go env
 export GOROOT=/usr/local/go
 export GOPATH=~/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-#export GOPROXY=https://mirrors.aliyun.com/goproxy
 export GOPROXY=https://goproxy.cn,direct
 
 # set term support 256color
 export TERM='xterm-256color'
 
+# Disable beeping in the man page
+export LESS="$LESS -R -Q"
+
 # Set proxy
-#export http_proxy="192.168.43.170:1080"
-#export https_proxy="192.168.43.170:1080"
+export http_proxy="192.168.1.246:1080"
+export https_proxy="192.168.1.246:1080"
 export -n http_proxy
 export -n https_proxy
 
-alias okgo="when-changed -r -v -1 . go run "
+alias okgo="reflex -r '\.go$' go run "
 alias admin="cd /mnt/c/Users/Administrator"
 

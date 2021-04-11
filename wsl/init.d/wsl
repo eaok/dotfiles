@@ -1,0 +1,6 @@
+#! /bin/sh
+#Filename: /etc/init.d/wsl
+#Usage: sudo /etc/init.d/wsl [start|stop|restart]
+
+/etc/init.d/ssh $1
+/etc/init.d/smbd $1

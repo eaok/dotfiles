@@ -119,7 +119,7 @@ let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '__pycache__']   " Hide temp f
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " nerdtree-git-plugin
-let g:NERDTreeIndicatorMapCustom = { 
+let g:NERDTreeGitStatusIndicatorMapCustom = { 
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -149,6 +149,7 @@ set hidden                      " allows you to hide buffers with unsaved change
 set formatoptions+=n            " smart auto-indenting inside numbered lists
 set highlight+=c:LineNr         " blend vertical separators with line numbers
 set lazyredraw                  " don't bother updating screen during macro playback
+set vb t_vb=                    " 去掉警告音
 set mousehide                   " 输入文本时隐藏光标
 
 set tabstop=4
@@ -203,6 +204,9 @@ autocmd FileType go nmap <leader>ds <Plug>(go-def-split)
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " for go
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+" for python
+autocmd BufNewFile,BufRead *.py setlocal expandtab autoindent tabstop=4 softtabstop=4 shiftwidth=4
 
 " for html
 autocmd BufNewFile,BufRead *.html setlocal expandtab tabstop=2 shiftwidth=2
