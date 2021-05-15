@@ -1,0 +1,50 @@
+version: '3'
+services:
+  redis:
+    image: redis:latest
+    container_name: "redis"
+    ports:
+      - 6379:6379
+    restart: always
+
+  mysql:
+    image: mysql:latest
+    container_name: "mysql"
+    environment:
+        MYSQL_ROOT_PASSWORD: 123456
+        MYSQL_DATABASE: test
+    ports:
+      - 3306:3306
+    restart: always
+
+  etcd:
+    image: gcr.io/etcd-development/etcd:latest
+    container_name: "etcd"
+    ports: 
+      - 2379:2379
+      - 2380:2380
+    environment:
+      - "ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379"
+      - "ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379"
+      - "ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380"
+      - "ETCD_INITIAL_ADVERTISE_PEER_URLS=http://0.0.0.0:2380"
+      - "ALLOW_NONE_AUTHENTICATION=yes"
+      - "ETCD_INITIAL_CLUSTER=node1=http://0.0.0.0:2380"
+      - "ETCD_NAME=node1"
+
+    restart: always
+
+
+#   alpine:
+#     build:
+#         context: .
+#         dockerfile: scratch.Dockerfile
+#     container_name: "alpine"
+#     ports:
+#       - 28893:8888
+#     volumes:
+#       - .:/code
+
+
+# docker-compose up -d
+# docker-compose down

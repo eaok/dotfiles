@@ -146,7 +146,7 @@ function git_branch {
 
 # Set go env
 export GOROOT=/usr/local/go
-export GOPATH=~/go
+export GOPATH=~/golang
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export GOPROXY=https://goproxy.cn,direct
 
@@ -162,6 +162,7 @@ export https_proxy="192.168.1.246:1080"
 export -n http_proxy
 export -n https_proxy
 
+alias cman='man -M /usr/share/man/zh_CN'
 alias okgo="reflex -r '\.go$' go run "
 alias admin="cd /mnt/c/Users/Administrator"
 
