@@ -1,13 +1,13 @@
-all: wsl windows ubuntu
+.PHONY: default ubuntu windows wsl
 
-.PHONY: ubuntu
+default: ubuntu
+
 ubuntu:
 	cp ~/.bashrc ubuntu
 	cp ~/.gitconfig ubuntu
 	cp ~/.tmux.conf ubuntu
 	cp ~/.vimrc ubuntu
 
-.PHONY: windows
 windows:
 	cp /mnt/c/Users/Administrator/.wslconfig windows
 	cp /mnt/c/Users/Administrator/.gitconfig windows
@@ -16,7 +16,6 @@ windows:
 	cp /mnt/c/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/Ubuntu-20.04.vbs windows
 	cp /mnt/c/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/hotkey.ahk windows
 
-.PHONY: wsl
 wsl:
 	cp --parents /etc/init.d/wsl wsl
 	cp ~/.bashrc wsl

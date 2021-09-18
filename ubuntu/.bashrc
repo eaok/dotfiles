@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+    xterm-color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -59,8 +59,7 @@ fi
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -84,9 +83,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -117,6 +113,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \[\033[01;31m\]$(git_branch)\[\033[00m\]\$ '
+
 # Set colors for man pages
 man() {
   env \
@@ -130,15 +129,45 @@ man() {
   man "$@"
 }
 
+# Set show git branch with color
 function git_branch {
     branch="`git branch 2>/dev/null | grep "^*" | sed -e "s/^* //"`"
     if [ "${branch}" != "" ]; then
         if [ "${branch}" = "(no branch)" ]; then
             branch="(`git rev-parse --short HEAD`...)"
-        fi  
+        fi
         echo "${branch}"
-    fi  
+    fi
 }
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \[\033[01;31m\]$(git_branch)\[\033[00m\]\$ '
-export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH 
+
+# Set go env
+export GOROOT=/usr/local/go
+export GOPATH=~/golang
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOPROXY=https://goproxy.cn,direct
+
+# Set java env
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=$PATH:${JAVA_HOME}/bin
+
+# Set node env
+export PATH=$PATH:/usr/local/node-v14.17.0-linux-x64/bin
+
+# set term support 256color, for xhsell cnnect
+export TERM='xterm-256color'
+
+# Disable beeping in the man page
+export LESS="$LESS -R -Q"
+
+# Set proxy
+export http_proxy="192.168.1.246:1080"
+export https_proxy="192.168.1.246:1080"
+export -n http_proxy
+export -n https_proxy
+
+alias cman='man -M /usr/share/man/zh_CN'
+alias okgo="reflex -r '\.go$' go run "
+
