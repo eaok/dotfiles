@@ -15,6 +15,8 @@ Plugin 'VundleVim/Vundle.vim'
 " https://github.com/fatih/vim-go
 " https://github.com/fatih/vim-go-tutorial
 Plugin 'fatih/vim-go'
+Plugin 'buoto/gotests-vim'
+
 Plugin 'ctrlpvim/ctrlp.vim'
 
 Plugin 'scrooloose/nerdtree'

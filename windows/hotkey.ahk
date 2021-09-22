@@ -159,6 +159,64 @@ Return
     Return
 }
 
+; hade's star 战舰编队移动
+!RButton::
+{
+    if WinExist("ahk_exe hadesstar.exe")
+    {
+        MouseGetPos, X, Y
+        ; SetKeyDelay, 0
+        ; SetMouseDelay, 10
+
+        Send, 1
+        Sleep, 30
+        Click, right, %X%, %Y%
+
+        Send, 2
+        Sleep, 30
+        Click, right, %X%, %Y%
+    }
+    Return
+}
+
+; hades' star 运输船编队移动
++RButton::
+{
+    if WinExist("ahk_exe hadesstar.exe")
+    {
+        MouseGetPos, X, Y
+
+
+        Send, 3
+        Sleep, 30
+        Click, right, %X%, %Y%
+
+        Send, 4
+        Sleep, 30
+        Click, right, %X%, %Y%
+
+        Send, 5
+        Sleep, 30
+        Click, right, %X%, %Y%
+
+        Send, 6
+        Sleep, 30
+        Click, right, %X%, %Y%
+
+        Send, 7
+        Sleep, 30
+        Click, right, %X%, %Y%
+
+        Send, 8
+        Sleep, 30
+        Click, right, %X%, %Y%
+
+        Send, 9
+        Sleep, 30
+        Click, right, %X%, %Y%
+    }
+    Return
+}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; 设置快捷键
@@ -173,11 +231,44 @@ Return
 Run cmd
 Return
 
-; z键失灵，改键
-; !CapsLock::
-; Send, z
-; Return
+; Alt + a 激活或最小化语雀
+!a::
+WinGetTitle, Title, A
+ascTitle := Asc(SubStr(Title, 0, 1))
+if ascTitle = 38592
+{
+    ; Msgbox, %Title%, %ascTitle%
+    ; WinMinimize, A
+    WinClose, A
+}
+else
+{
+    Send, ^!y
+}
+Return
 
+; Alt + q 激活或最小化Typora
+!q::
+WinGetTitle, Title, A
+ascTitle := SubStr(Title, -5)
+; MsgBox, The active window is "%ascTitle%".
+if ascTitle = Typora
+{
+    ; Msgbox, %Title%, %ascTitle%
+    WinMinimize, A
+    ; WinClose, A
+}
+else
+{
+    if WinExist("ahk_exe Typora.exe")
+        WinActivate ; use the window found above
+    else
+        run, Typora.exe, C:\Program Files\Typora, max
+}
+Return
+
+; hotstrings
+::btw::by the way
 
 ^!r::Reload  ; Assign Ctrl-Alt-R as a hotkey to restart the script.
-^!p::Pause
+^!p::Suspend
