@@ -1,0 +1,27 @@
+version: '3'
+services:
+  grafana:
+    container_name: "grafana"
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    restart: always
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+
+
+  prometheus:
+    container_name: "prometheus"
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    restart: always
+    volumes:
+      - /home/tahr/go-gin-api/deploy/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - "/etc/localtime:/etc/localtime:ro"
+
+
+# docker-compose up -d
+# docker-compose stop
+# docker-compose start
+# docker-compose down
