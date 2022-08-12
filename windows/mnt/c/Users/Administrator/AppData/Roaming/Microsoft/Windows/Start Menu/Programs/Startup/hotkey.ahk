@@ -231,19 +231,21 @@ Return
 Run cmd
 Return
 
-; Alt + a 激活或最小化语雀
-!a::
+; Win+z 运行Sticky Notes
+#z::
+Run explorer.exe shell:appsFolder\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App
+Return
+
+; Alt + z 激活或最小化Joplin
+!z::
 WinGetTitle, Title, A
-ascTitle := Asc(SubStr(Title, 0, 1))
-if ascTitle = 38592
+if Title = Joplin
 {
-    ; Msgbox, %Title%, %ascTitle%
-    ; WinMinimize, A
     WinClose, A
 }
 else
 {
-    Send, ^!y
+    run, Joplin.exe, C:\Program Files\Joplin
 }
 Return
 

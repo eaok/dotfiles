@@ -1,20 +1,15 @@
-.PHONY: default ubuntu windows wsl
+.PHONY: default winwsl windows wsl ubuntu
 
-default: ubuntu
+default: winwsl
 
-ubuntu:
-	cp ~/.bashrc ubuntu
-	cp ~/.gitconfig ubuntu
-	cp ~/.tmux.conf ubuntu
-	cp ~/.vimrc ubuntu
+winwsl: windows wsl
 
 windows:
 	cp /mnt/c/Users/Administrator/.wslconfig windows
 	cp /mnt/c/Users/Administrator/.gitconfig windows
-	cp /mnt/c/Users/Administrator/.config/custom/cmd_auto.bat windows
-	cp /mnt/c/Users/Administrator/.config/custom/docker-compose.yml windows
-	cp /mnt/c/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/Ubuntu-20.04.vbs windows
-	cp /mnt/c/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/hotkey.ahk windows
+	cp --parents /mnt/c/Users/Administrator/.config/custom/* windows
+	cp --parents /mnt/c/Users/Administrator/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/* windows
+	cp --parents /mnt/c/Users/Administrator/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json windows
 
 wsl:
 	cp --parents /etc/init.d/wsl wsl
@@ -22,4 +17,10 @@ wsl:
 	cp ~/.gitconfig wsl
 	cp ~/.tmux.conf wsl
 	cp ~/.vimrc wsl
+
+ubuntu:
+	cp ~/.bashrc ubuntu
+	cp ~/.gitconfig ubuntu
+	cp ~/.tmux.conf ubuntu
+	cp ~/.vimrc ubuntu
 

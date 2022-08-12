@@ -1,8 +1,8 @@
 # dotfiles
 
-#### 备份ubuntu的文件
+#### 默认备份winwsl
 ```shell
-make ubuntu
+make
 ```
 
 #### 备份windows的文件
@@ -13,6 +13,11 @@ make windows
 #### 备份wsl的文件
 ```shell
 make wsl
+```
+
+#### 备份ubuntu的文件
+```shell
+make ubuntu
 ```
 
 #### 安装apt文件夹中的软件
